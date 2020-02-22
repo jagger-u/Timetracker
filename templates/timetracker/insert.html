@@ -1,0 +1,116 @@
+{% extends "timetracker/base.html" %}
+{% block head_title %}Insert data{% endblock %}
+{% block header_title %}Insert data{% endblock %}
+{% block content %}
+<section class="mb-5">
+<div class="container">
+  <form action="{% url 'time-insert-add' %}" id="YEAH" method="POST">
+    {% csrf_token %}
+    <div class="row mt-4">
+      <div class="col-6 mb-4 pl-4">
+        <div class="form-group">
+          <select id="TAGS" class="form-control" name="tag_name">
+            <option>Select tag</option>
+            <option>Breakthrough</option>
+            <option>Insight</option>
+            <option>Pushing</option>
+            <option>Lost</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input id="COMMENTS" type="text" name="comments" placeholder="Write comments">
+        </div>
+      </div>  
+      <div class="col-6 mb-4 text-right"> 
+        <input id="TIMESELECT" type="date" name="tDate">
+      </div>  
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12">  
+        <div class="time-input">
+          <input class="label-text" type="text" name="act_name1" value="Coding">
+          <textarea class="entry-text" name="long_string1"></textarea>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12">  
+        <div class="time-input">
+          <input class="label-text" type="text" name="act_name2" value="Learning">
+          <textarea class="entry-text" name="long_string2"></textarea>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12">  
+        <div class="time-input">
+          <input class="label-text" type="text" name="act_name3" value="Brainstorming">
+          <textarea class="entry-text" name="long_string3"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>  
+  <div class="big-buttons">
+    <button type="submit" class="btn btn-primary" form="YEAH">Submit</button>
+    <button type="submit" class="btn btn-secondary">Clear</button>
+  </div>
+  <div class="instructions-text mt-4">
+    IDEA: in addition to manually adding, let's create an advanced clock diagram setter. <br>
+    Basically, we press start, and press finish wherever it fits our place, push next <br>
+    and go to the next section and start timer. Something should flow. This is faster!
+  </div>
+  <div class="instructions-text mt-4">
+    You can change the activity names by clicking on them. <br> 
+    Input follows a specific format. <br>
+    For example: 8:00-9:00,14:00-15:05
+  </div>
+</div>
+</section>
+<section>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start</th>
+        <th scope="col">Finish</th>
+        <th scope="col">Time taken</th>
+        <th scope="col">Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in dailyAct %}
+      <tr>
+        <th scope="row">{{ item.id }}</th>
+        <td>{{item.act_name}}</td>
+        <td>{{item.start_time|date:"F d"}}</td>
+        <td>{{item.start_time|date:"H:i"}}</td>
+        <td>{{item.end_time|date:"H:i"}}</td>
+        <td>{{item.calcDiff_show}}</td>
+        <td>{{item.act_comments}}</td>
+      </tr>
+      {% endfor %}  
+    </tbody>
+  </table>
+</div>
+</section>
+
+<script>
+var today = new Date();
+var y_i = today.getFullYear();
+var m_i = today.getMonth();
+var d_i = today.getDate();
+console.log("OK")
+var year = y_i;
+var month = m_i + 1;
+var day = d_i;
+if (month < 10) {month = "0"+month;}
+if (day < 10) {day = "0"+day;}
+passIn = year+'-'+month+'-'+day;
+document.getElementById('TIMESELECT').setAttribute("value", passIn);
+</script>
+
+
+
+<script>
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block head_title %}{% endblock %}</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'timetracker/css/style.css' %}">
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar">
+    <div class="time-stuff">
+      <span id="time-stuff-DAY"></span>
+      <span id="time-stuff-TIME"></span>
+      <span id="time-stuff-DATE"></span>
+    </div>
+    <ul>
+        <li><a href="{% url 'time-home' %}"><i class="fas fa-home"></i>Home</a></li>
+        <li><a href="{% url 'time-insert' %}"><i class="fas fa-pencil-alt"></i>Insert data</a></li>
+        <li><a href="{% url 'time-stats' %}"><i class="fas fa-chart-bar"></i>Statistics</a></li>
+        <li><a href="#"><i class="fas fa-chart-line"></i>Timeline</a></li>
+        <li><a href="{% url 'time-calendar' %}"><i class="fas fa-calendar"></i>Calendar</a></li>
+        <li><a href="{% url 'particles' %}"><i class="fas fa-atom"></i>Particles</a></li>
+    </ul>
+  </div>
+  <div class="main_content">
+    <div class="header">{% block header_title %}{% endblock %}</div>  
+    {% block content %}
+    {% endblock %}
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script>
+window.onload = function(){
+var today = new Date();
+var y_i = today.getFullYear();
+var m_i = today.getMonth();
+var d_i = today.getDate();
+var wd_i = today.getDay();
+var hour_i = today.getHours();
+var min_i = today.getMinutes(); 
+
+
+const wdays_list = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']    //According to docs
+const months_list = ['Jan','Feb','Mar','Apr','May','Jun','Jul',
+'Aug','Sep','Oct','Nov','Dec']
+document.getElementById('time-stuff-TIME').innerText = hour_i+':'+min_i;
+document.getElementById('time-stuff-DAY').innerText = wdays_list[wd_i];
+document.getElementById('time-stuff-DATE').innerText = months_list[m_i]+'-'+d_i;
+};
+</script>

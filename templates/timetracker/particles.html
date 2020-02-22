@@ -1,0 +1,21 @@
+{% extends "timetracker/base.html" %}
+{% block head_title %}Particles{% endblock %}
+{% block header_title %}Particles{% endblock %}
+{% block content %}
+<style>
+.p5Canvas {
+  position: relative;
+  left: 28%;
+}
+</style>
+<div class="container">
+{% load static %}
+<script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
+<script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/addons/p5.sound.min.js"></script>
+<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.12.0/matter.min.js"></script>
+<script src="{% static 'timetracker/javascript/proteinGenerator.js' %}"></script>
+<script src="{% static 'timetracker/javascript/c3.js' %}"></script>
+<script src="{% static 'timetracker/javascript/helperfunctions.js' %}"></script>
+<script src="{% static 'timetracker/javascript/sketch.js' %}"></script>
+</div>
+{% endblock %}

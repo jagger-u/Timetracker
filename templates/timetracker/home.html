@@ -1,0 +1,41 @@
+{% extends "timetracker/base.html" %}
+{% block head_title %}Welcome to Analytics{% endblock %}
+{% block header_title %}Welcome to Analytics{% endblock %}
+{% block content %}
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Total</th>
+        <th scope="col">Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in timeData %}
+      <tr>
+        <th scope="row">{{item.Id}}</th>
+        <td>{{item.Date}}</td>
+        <td>{{item.Total}}</td>
+        <td>
+          {% for tag in item.Tags %}
+            {% if tag == 'Breakthrough' %}
+              <span class="badge badge-success">{{tag}}</span>
+            {% elif tag == 'Insight' %}
+              <span class="badge badge-info">{{tag}}</span>
+            {% elif tag == 'Lost' %}
+              <span class="badge badge-danger">{{tag}}</span>
+            {% elif tag == 'Pushing' %}
+              <span class="badge badge-warning">{{tag}}</span>
+            {% else %}
+            {% endif %}
+          {% endfor %}
+        </td>
+          
+      </tr>
+      {% endfor %}  
+    </tbody>
+  </table>
+  </div>
+{% endblock %}
